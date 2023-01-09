@@ -8,8 +8,8 @@ using UnityEngine.UI;
     {
         [Header("Viewpoint")]
         [SerializeField] string PointText = "Press E";
-        [Space, SerializeField] Camera cam;
-        [SerializeField] GameObject PlayerController;
+        Camera cam;
+        GameObject PlayerController;
         [SerializeField] Image ImagePrefab;
         [Space ,SerializeField, Range(0.1f, 20)] float MaxViewRange = 8;
         [SerializeField, Range(0.1f, 20)] float MaxTextViewRange = 3;
@@ -68,6 +68,12 @@ using UnityEngine.UI;
                 position = camera.transform.position + (vectorFromCam - proj);
             }
             return position;
+        }
+
+        public void kill(){
+           Destroy(ImageUI);
+           Destroy(ImageText);
+           Destroy(this.gameObject);
         }
 
     }

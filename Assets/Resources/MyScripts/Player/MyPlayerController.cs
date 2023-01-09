@@ -57,6 +57,18 @@ using UnityEngine;
         float installGravity;
         bool WallDistance;
         [HideInInspector] public float WalkingValue;
+        public static MyPlayerController instance;
+        private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
         void Start()
         {
             characterController = GetComponent<CharacterController>();

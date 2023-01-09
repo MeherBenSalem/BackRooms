@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Video;
 
 public class VideoControl : MonoBehaviour
 {
     [SerializeField] VideoPlayer screen;
     [SerializeField] Light tvLight;
-    [SerializeField] VideoClip nextVideo;
+    [SerializeField] UnityEvent OnVideoFinish;
 
     void Start()
     {
@@ -32,7 +33,6 @@ public class VideoControl : MonoBehaviour
 
     void ChangeVideo(VideoPlayer vp)
     {
-        screen.clip = nextVideo;
-        screen.Play();
+        OnVideoFinish.Invoke();
     }
 }
