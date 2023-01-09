@@ -13,6 +13,7 @@ public class Interactable : MonoBehaviour
     {
         if(!isActive)
         return;
+        Debug.Log("Trigger");
         OnTrigger.Invoke();
     }
     public void Active(){
