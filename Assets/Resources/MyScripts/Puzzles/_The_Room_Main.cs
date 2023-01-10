@@ -26,7 +26,6 @@ public class _The_Room_Main : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             timer -= 1f;
-            Debug.Log(timer);
         }
         FailPuzzle();
     }
@@ -35,10 +34,12 @@ public class _The_Room_Main : MonoBehaviour
         MyPlayerVitals.instance.Health = MyPlayerVitals.instance.Health-100;
         DisableSwitches();
         OnFail.Invoke();
+        StopCoroutine(StartTimer());
     }
     public void SuccessPuzzle(){
         OnSuccess.Invoke();
         DisableSwitches();
+        StopCoroutine(StartTimer());
     }
     void DisableSwitches(){
         foreach(Interactable s in switches){

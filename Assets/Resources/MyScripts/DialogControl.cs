@@ -6,23 +6,33 @@ using UnityEngine.UI;
 
 public class DialogControl : MonoBehaviour
 {
-    [SerializeField] bool isAudioOn;
-    [SerializeField] bool isOnce;
-    public AudioSource audioSource;
     public Text text;
-    public string[] texts;
-    public float changeInterval = 5.0f; // Interval in seconds at which to change the text
-
     bool isPlaying;
+    public Dialog currentDiag;
+    public static DialogControl instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
-    public void StartAudio()
+
+    public void StartAudio(Dialog dialog)
     {
         if(text.isActiveAndEnabled)
-        return;
+            return;
+        StopAudio();
+        currentDiag = dialog;
+        if(currentDiag.audioSource!=null)
+            currentDiag.audioSource.Play();
         text.enabled = true;
-        text.text = texts[0];
-        if(isAudioOn)
-        audioSource.Play();
+        text.text = currentDiag.texts[0];
         isPlaying = true;
         StartCoroutine(UpdateText());
     }
@@ -31,17 +41,21 @@ public class DialogControl : MonoBehaviour
     {
     while(isPlaying)
     {
-        yield return new WaitForSeconds(changeInterval);
-        int nextIndex = (Array.IndexOf(texts, text.text) + 1) % texts.Length;
+        yield return new WaitForSeconds(currentDiag.changeInterval);
+        int nextIndex = (Array.IndexOf(currentDiag.texts, text.text) + 1) % currentDiag.texts.Length;
         if (nextIndex == 0) {
             text.enabled = false;
             isPlaying = false;
-            if (isOnce) {
-                Destroy(this.gameObject,1f);
+            if (currentDiag.isOnce) {
+                Destroy(currentDiag.gameObject,1f);
             }
             yield break;
         }
-        text.text = texts[nextIndex];
+        text.text = currentDiag.texts[nextIndex];
     }
+    }
+    public void StopAudio(){
+        StopAllCoroutines();
+        text.enabled = false;
     }
 }
