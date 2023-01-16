@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class MyPlayerVitals : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MyPlayerVitals : MonoBehaviour
     private float currentHealth;
     public Slider healthSlider;
     public Slider staminaSlider;
+    [SerializeField] PlayableDirector damageSequence;
 
     public static MyPlayerVitals instance;
     private void Awake()
@@ -22,19 +24,29 @@ public class MyPlayerVitals : MonoBehaviour
         }
     }
 
+    private float previousHealth;
     public float Health
     {
-        get { return currentHealth; }
-        set
+    get { return currentHealth; }
+    set
+    {
+        previousHealth = currentHealth;
+        currentHealth = Mathf.Clamp(value, 0f, maxHealth);
+        healthSlider.value = currentHealth;
+        if (currentHealth == 0)
         {
-            currentHealth = Mathf.Clamp(value, 0f, maxHealth);
-            healthSlider.value = currentHealth / maxHealth;
-            if (currentHealth == 0)
-            {
-                Debug.Log("Player is dead!");
-            }
+            Debug.Log("Player is dead!");
+        }
+        if (currentHealth < previousHealth)
+        {
+            damageSequence.Play();
+        }
+        else if (currentHealth > previousHealth)
+        {
+            Debug.Log("Player gained health!");
         }
     }
+}
     public float MaxStamina
     {
         get { return maxStamina; }

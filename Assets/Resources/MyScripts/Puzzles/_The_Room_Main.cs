@@ -29,10 +29,10 @@ public class _The_Room_Main : MonoBehaviour
         }
         FailPuzzle();
     }
+    [SerializeField] float Damage;
 
     public void FailPuzzle(){
-        MyPlayerVitals.instance.Health = MyPlayerVitals.instance.Health-100;
-        DisableSwitches();
+        MyPlayerVitals.instance.Health -= Damage;
         OnFail.Invoke();
         StopCoroutine(StartTimer());
     }
