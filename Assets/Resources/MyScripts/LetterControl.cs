@@ -18,13 +18,11 @@ public class LetterControl : MonoBehaviour
     {
         panelText.text = text;
     }
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)&&panel.activeInHierarchy) {
+    public void ClosePanel(){        
         MyPlayerController.instance.enabled=true;
         panel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        }
     }
 
 }
