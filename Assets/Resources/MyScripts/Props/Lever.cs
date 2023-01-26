@@ -15,7 +15,6 @@ public class Lever : MonoBehaviour
 
     public void Activate()
     {
-        isOn = !isOn;
         if (isOn)
         {
         OnEvent.Invoke();
@@ -28,5 +27,6 @@ public class Lever : MonoBehaviour
         anim.Play("Lever_Off");
         lightOn.enabled=false;
         }
+        isOn = !isOn;
     }
 }
