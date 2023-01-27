@@ -1,5 +1,4 @@
-﻿//by EvolveGames
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,25 +6,17 @@ using UnityEngine;
     public class MyPlayerController : MonoBehaviour
     {
         [Header("PlayerController")]
-        [SerializeField] public Transform Camera;
+        [SerializeField] Transform Camera;
         [SerializeField, Range(1, 10)] float walkingSpeed = 3.0f;
-        [Range(0.1f, 5)] public float CroughSpeed = 1.0f;
-        [SerializeField, Range(2, 20)] float RuningSpeed = 4.0f;
+        [Range(0.1f, 5)] float CroughSpeed = 1.0f;
         [SerializeField, Range(0, 20)] float jumpSpeed = 6.0f;
         [SerializeField, Range(0.5f, 10)] float lookSpeed = 2.0f;
         [SerializeField, Range(10, 120)] float lookXLimit = 80.0f;
         [Space(20)]
         [Header("Advance")]
-        [SerializeField] float RunningFOV = 65.0f;
-        [SerializeField] float SpeedToFOV = 4.0f;
         [SerializeField] float CroughHeight = 1.0f;
         [SerializeField] float gravity = 20.0f;
-        [SerializeField] float timeToRunning = 2.0f;
         [HideInInspector] public bool canMove = true;
-        [HideInInspector] public bool CanRunning = true;
-        [SerializeField] float stamina;
-        [SerializeField] float maxStamina;
-        [SerializeField] float staminaConsumptionRate = 5f;
 
         [Space(20)]
         [Header("Climbing")]
@@ -36,30 +27,30 @@ using UnityEngine;
         [Space(20)]
         [Header("Input")]
         [SerializeField] KeyCode CroughKey = KeyCode.LeftControl;
-
+        [Space(20)]
+        [Header("Sound")]
+        [SerializeField] AudioSource footSteps;
 
         [HideInInspector] public CharacterController characterController;
-        [HideInInspector] public Vector3 moveDirection = Vector3.zero;
-        bool isCrough = false;
+        Vector3 moveDirection = Vector3.zero;
         float InstallCroughHeight;
         float rotationX = 0;
-        [HideInInspector] public bool isRunning = false;
         Vector3 InstallCameraMovement;
         float InstallFOV;
         Camera cam;
-        [HideInInspector] public bool Moving;
+        bool Moving;
         [HideInInspector] public float vertical;
         [HideInInspector] public float horizontal;
         [HideInInspector] public float Lookvertical;
         [HideInInspector] public float Lookhorizontal;
+        bool isCrouch=false;
         private MyPlayerVitals myVitals;
-        float RunningValue;
         float installGravity;
         bool WallDistance;
-        [HideInInspector] public float WalkingValue;
+        float WalkingValue;
         public static MyPlayerController instance;
         private void Awake()
-    {
+        {
         if (instance == null)
         {
             instance = this;
@@ -68,7 +59,7 @@ using UnityEngine;
         {
             Destroy(gameObject);
         }
-    }
+        }
         void Start()
         {
             characterController = GetComponent<CharacterController>();
@@ -79,11 +70,8 @@ using UnityEngine;
             InstallCroughHeight = characterController.height;
             InstallCameraMovement = Camera.localPosition;
             InstallFOV = cam.fieldOfView;
-            RunningValue = RuningSpeed;
             installGravity = gravity;
             WalkingValue = walkingSpeed;
-            maxStamina = myVitals.MaxStamina;
-            stamina = maxStamina;
         }
 
         void Update()
@@ -96,26 +84,15 @@ using UnityEngine;
             }
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
-            isRunning = !isCrough ? CanRunning ? Input.GetKey(KeyCode.LeftShift) : false : false;
-            vertical = canMove ? (isRunning ? RunningValue : WalkingValue) * Input.GetAxis("Vertical") : 0;
-            horizontal = canMove ? (isRunning ? RunningValue : WalkingValue) * Input.GetAxis("Horizontal") : 0;
-        if (isRunning) {
-            if (stamina > 0) {
-                stamina -= staminaConsumptionRate * Time.deltaTime;
-                RunningValue = Mathf.Lerp(RunningValue, RuningSpeed, timeToRunning * Time.deltaTime);
-                myVitals.UpdateStaminaSlider(stamina);
-            } else {
-                RunningValue = WalkingValue;
-            }
-        } else {
-        stamina = Mathf.Min(stamina + staminaConsumptionRate * Time.deltaTime, maxStamina);
-        myVitals.UpdateStaminaSlider(stamina);
-             }
+            vertical = canMove ? WalkingValue * Input.GetAxisRaw("Vertical") : 0;
+            horizontal = canMove ? WalkingValue * Input.GetAxisRaw("Horizontal") : 0;
+        
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * vertical) + (right * horizontal);
 
             if (Input.GetButton("Jump") && canMove && characterController.isGrounded && !isClimbing)
             {
+                footSteps.Stop();
                 moveDirection.y = jumpSpeed;
             }
             else
@@ -123,25 +100,27 @@ using UnityEngine;
                 moveDirection.y = movementDirectionY;
             }
             characterController.Move(moveDirection * Time.deltaTime);
-            Moving = horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0 ? true : false;
-
+            if (horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0) {
+                if(!footSteps.isPlaying&&!isCrouch) {
+                footSteps.Play();
+                }
+              }else {
+               footSteps.Stop();
+            }
             if (Cursor.lockState == CursorLockMode.Locked && canMove)
             {
-                Lookvertical = -Input.GetAxis("Mouse Y");
-                Lookhorizontal = Input.GetAxis("Mouse X");
+                Lookvertical = -Input.GetAxisRaw("Mouse Y");
+                Lookhorizontal = Input.GetAxisRaw("Mouse X");
 
                 rotationX += Lookvertical * lookSpeed;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
                 Camera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
                 transform.rotation *= Quaternion.Euler(0, Lookhorizontal * lookSpeed, 0);
-
-                if (isRunning && Moving) cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, RunningFOV, SpeedToFOV * Time.deltaTime);
-                else cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, InstallFOV, SpeedToFOV * Time.deltaTime);
             }
 
             if (Input.GetKey(CroughKey))
             {
-                isCrough = true;
+                isCrouch=true;
                 float Height = Mathf.Lerp(characterController.height, CroughHeight, 5 * Time.deltaTime);
                 characterController.height = Height;
                 WalkingValue = Mathf.Lerp(WalkingValue, CroughSpeed, 6 * Time.deltaTime);
@@ -151,7 +130,7 @@ using UnityEngine;
             {
                 if (characterController.height != InstallCroughHeight)
                 {
-                    isCrough = false;
+                    isCrouch=false;
                     float Height = Mathf.Lerp(characterController.height, InstallCroughHeight, 6 * Time.deltaTime);
                     characterController.height = Height;
                     WalkingValue = Mathf.Lerp(WalkingValue, walkingSpeed, 4 * Time.deltaTime);
@@ -164,7 +143,6 @@ using UnityEngine;
         {
             if (other.tag == "Ladder" && CanClimbing)
             { 
-                CanRunning = false;
                 isClimbing = true;
                 WalkingValue /= 2;
             }
@@ -173,14 +151,13 @@ using UnityEngine;
         {
             if (other.tag == "Ladder" && CanClimbing)
             {
-                moveDirection = new Vector3(0, Input.GetAxis("Vertical") * Speed * (-Camera.localRotation.x / 1.7f), 0);
+                moveDirection = new Vector3(0, Input.GetAxisRaw("Vertical") * Speed * (-Camera.localRotation.x / 1.7f), 0);
             }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.tag == "Ladder" && CanClimbing)
             {
-                CanRunning = true;
                 isClimbing = false;
                 WalkingValue *= 2;
             }

@@ -5,10 +5,8 @@ using UnityEngine.Playables;
 public class MyPlayerVitals : MonoBehaviour
 {
     public float maxHealth = 100f;
-    public float maxStamina = 100f;
     private float currentHealth;
     public Slider healthSlider;
-    public Slider staminaSlider;
     [SerializeField] PlayableDirector damageSequence;
 
     public static MyPlayerVitals instance;
@@ -47,20 +45,10 @@ public class MyPlayerVitals : MonoBehaviour
         }
     }
 }
-    public float MaxStamina
-    {
-        get { return maxStamina; }
-    }
-
-    public void UpdateStaminaSlider(float currentStamina)
-    {
-        staminaSlider.value = currentStamina;
-    }
 
     void Start()
     {
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
-        staminaSlider.maxValue = maxStamina;
     }
 }

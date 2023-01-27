@@ -3623,7 +3623,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 4.752899, y: 0}
   m_SizeDelta: {x: 19.506, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3674,13 +3674,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8039604845369856661}
+  - component: {fileID: 1603369572}
   m_Layer: 5
   m_Name: Settings_Menu_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8039604845369856661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3702,6 +3703,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1603369572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8039604845369856660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3e6a8d398c5d547bb7ee756e3d6e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 8039604844831257398}
+  resolutionDropdown: {fileID: 8039604843864695677}
+  graphicQualityDropdown: {fileID: 8039604844492031490}
+  fpsDropdown: {fileID: 8039604844270822119}
+  fullscreenToggle: {fileID: 8039604845891772271}
 --- !u!1 &8039604845376083174
 GameObject:
   m_ObjectHideFlags: 0

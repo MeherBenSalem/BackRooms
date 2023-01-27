@@ -20,15 +20,18 @@ public class Scene_Manager : MonoBehaviour
 
     IEnumerator LoadSceneAsync(int index)
     {
-        // Start a load operation for the new scene
+        float progress = 0;
+        progressSlider.value = progress;
+        yield return new WaitForSeconds(2);
         loadOperation = SceneManager.LoadSceneAsync(index);
-
-        // Wait for the load operation to complete
         while (!loadOperation.isDone)
         {
-            float progress = Mathf.Clamp01(loadOperation.progress / 0.9f);
+            progress = Mathf.Clamp01(loadOperation.progress / 0.9f);
             progressSlider.value = progress;
             yield return null;
         }
+    }
+    public void Quit(){
+        Application.Quit();
     }
 }
