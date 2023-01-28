@@ -84,8 +84,8 @@ using UnityEngine;
             }
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
-            vertical = canMove ? WalkingValue * Input.GetAxisRaw("Vertical") : 0;
-            horizontal = canMove ? WalkingValue * Input.GetAxisRaw("Horizontal") : 0;
+            vertical = canMove ? WalkingValue * Input.GetAxis("Vertical") : 0;
+            horizontal = canMove ? WalkingValue * Input.GetAxis("Horizontal") : 0;
         
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * vertical) + (right * horizontal);
@@ -109,8 +109,8 @@ using UnityEngine;
             }
             if (Cursor.lockState == CursorLockMode.Locked && canMove)
             {
-                Lookvertical = -Input.GetAxisRaw("Mouse Y");
-                Lookhorizontal = Input.GetAxisRaw("Mouse X");
+                Lookvertical = -Input.GetAxis("Mouse Y");
+                Lookhorizontal = Input.GetAxis("Mouse X");
 
                 rotationX += Lookvertical * lookSpeed;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
@@ -151,7 +151,7 @@ using UnityEngine;
         {
             if (other.tag == "Ladder" && CanClimbing)
             {
-                moveDirection = new Vector3(0, Input.GetAxisRaw("Vertical") * Speed * (-Camera.localRotation.x / 1.7f), 0);
+                moveDirection = new Vector3(0, Input.GetAxis("Vertical") * Speed * (-Camera.localRotation.x / 1.7f), 0);
             }
         }
         private void OnTriggerExit(Collider other)
