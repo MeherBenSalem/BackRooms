@@ -12,7 +12,7 @@ public class SettingsMenu : MonoBehaviour
     public Toggle fullscreenToggle;
 
     private Resolution[] resolutions;
-    private List<string> fpsOptions = new List<string>() { "30", "60", "90", "Unlimited" };
+    private List<string> fpsOptions = new List<string>() { "60", "90", "120", "200","240","Unlimited" };
     private const string VOLUME_KEY = "volume";
     private const string RESOLUTION_KEY = "resolution";
     private const string GRAPHIC_QUALITY_KEY = "graphic_quality";
@@ -46,7 +46,7 @@ public class SettingsMenu : MonoBehaviour
 
         // Graphic Quality
         graphicQualityDropdown.ClearOptions();
-        options = new List<string>() { "Low", "Medium", "High", "Ultra" };
+        options = new List<string>() { "Performance","Balance", "High", "Ultra" };
         graphicQualityDropdown.AddOptions(options);
         graphicQualityDropdown.value = PlayerPrefs.GetInt(GRAPHIC_QUALITY_KEY, QualitySettings.GetQualityLevel());
         graphicQualityDropdown.RefreshShownValue();
@@ -82,7 +82,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetGraphicQuality(int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        QualitySettings.SetQualityLevel(qualityIndex);        
         PlayerPrefs.SetInt(GRAPHIC_QUALITY_KEY, qualityIndex);
         PlayerPrefs.Save();
     }

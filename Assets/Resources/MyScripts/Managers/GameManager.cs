@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         // Don't destroy the game manager when a new scene is loaded
         DontDestroyOnLoad(gameObject);
     }
-    void Start()
+    void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
