@@ -682,7 +682,7 @@ MonoBehaviour:
     height: 1
 --- !u!95 &3068106456529641903
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -699,7 +699,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1011283980132947643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,33 +1229,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 7332362250646431525}
   walkingSpeed: 2.2
-  CroughSpeed: 1
-  RuningSpeed: 4
   jumpSpeed: 5
   lookSpeed: 2
   lookXLimit: 80
-  RunningFOV: 65
-  SpeedToFOV: 4
   CroughHeight: 1
   gravity: 20
-  timeToRunning: 2
   canMove: 1
-  CanRunning: 1
-  stamina: 100
-  maxStamina: 100
-  staminaConsumptionRate: 10
   CanClimbing: 1
   Speed: 2
   CroughKey: 306
+  footSteps: {fileID: 0}
   characterController: {fileID: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  isRunning: 0
-  Moving: 0
   vertical: 0
   horizontal: 0
   Lookvertical: 0
   Lookhorizontal: 0
-  WalkingValue: 0
 --- !u!114 &1060751008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,9 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  maxStamina: 50
   healthSlider: {fileID: 98534036}
-  staminaSlider: {fileID: 1646067570}
   damageSequence: {fileID: 954481730}
 --- !u!114 &1378337681
 MonoBehaviour:
@@ -1291,7 +1277,7 @@ MonoBehaviour:
   interactionRange: 2
 --- !u!95 &7483698115357303967
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1308,7 +1294,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7332362250415691681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,8 +1356,8 @@ GameObject:
   - component: {fileID: 7332362250646431525}
   - component: {fileID: 7332362250646431527}
   - component: {fileID: 7332362250646431524}
-  - component: {fileID: 7332362250646431521}
   - component: {fileID: 7332362249272845489}
+  - component: {fileID: 1744871850897646235}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -1446,69 +1432,9 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7332362250646431514}
   m_Enabled: 1
---- !u!114 &7332362250646431521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7332362250646431514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 7332362250646431525}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 2
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!95 &7332362249272845489
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1525,7 +1451,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1744871850897646235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332362250646431514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  m_VolumeTrigger: {fileID: 7332362250646431525}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 2
+  m_AntialiasingQuality: 2
+  m_StopNaN: 1
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &7336402495842494867
 GameObject:
   m_ObjectHideFlags: 0

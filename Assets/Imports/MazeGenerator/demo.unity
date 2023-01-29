@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 75e576946fd0db54c8854d3f57b2972d, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 75e576946fd0db54c8854d3f57b2972d,
+    type: 2}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -125,7 +126,8 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 --- !u!1 &162972839 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 130820, guid: 6414ea9cfa2ccc24a95c775ffa926968, type: 3}
+  m_CorrespondingSourceObject: {fileID: 130820, guid: 6414ea9cfa2ccc24a95c775ffa926968,
+    type: 3}
   m_PrefabInstance: {fileID: 802817133}
   m_PrefabAsset: {fileID: 0}
 --- !u!82 &162972840
@@ -535,7 +537,8 @@ MonoScript:
 --- !u!1 &1346720322
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 126140, guid: 3549f273ff63f754eb749081e517a9fa, type: 2}
+  m_CorrespondingSourceObject: {fileID: 126140, guid: 3549f273ff63f754eb749081e517a9fa,
+    type: 2}
   m_PrefabInstance: {fileID: 835618750}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -554,7 +557,8 @@ GameObject:
 --- !u!81 &1346720323
 AudioListener:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8101472, guid: 3549f273ff63f754eb749081e517a9fa, type: 2}
+  m_CorrespondingSourceObject: {fileID: 8101472, guid: 3549f273ff63f754eb749081e517a9fa,
+    type: 2}
   m_PrefabInstance: {fileID: 835618750}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346720322}
@@ -562,7 +566,8 @@ AudioListener:
 --- !u!124 &1346720325
 Behaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 12460774, guid: 3549f273ff63f754eb749081e517a9fa, type: 2}
+  m_CorrespondingSourceObject: {fileID: 12460774, guid: 3549f273ff63f754eb749081e517a9fa,
+    type: 2}
   m_PrefabInstance: {fileID: 835618750}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346720322}
@@ -570,7 +575,8 @@ Behaviour:
 --- !u!20 &1346720326
 Camera:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2099578, guid: 3549f273ff63f754eb749081e517a9fa, type: 2}
+  m_CorrespondingSourceObject: {fileID: 2099578, guid: 3549f273ff63f754eb749081e517a9fa,
+    type: 2}
   m_PrefabInstance: {fileID: 835618750}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346720322}
@@ -613,7 +619,8 @@ Camera:
 --- !u!4 &1346720327
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 493056, guid: 3549f273ff63f754eb749081e517a9fa, type: 2}
+  m_CorrespondingSourceObject: {fileID: 493056, guid: 3549f273ff63f754eb749081e517a9fa,
+    type: 2}
   m_PrefabInstance: {fileID: 835618750}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346720322}
