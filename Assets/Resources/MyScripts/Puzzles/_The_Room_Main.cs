@@ -20,15 +20,7 @@ public class _The_Room_Main : MonoBehaviour
         OnPuzzleStart.Invoke();
         isStarted=true;
     }
-    IEnumerator StartTimer()
-    {
-        while (timer > 0f)
-        {
-            yield return new WaitForSeconds(1f);
-            timer -= 1f;
-        }
-        FailPuzzle();
-    }
+
     [SerializeField] float Damage;
 
     public void FailPuzzle(){
@@ -39,7 +31,7 @@ public class _The_Room_Main : MonoBehaviour
     public void SuccessPuzzle(){
         OnSuccess.Invoke();
         DisableSwitches();
-        StopCoroutine(StartTimer());
+        StopAllCoroutines();
     }
     void DisableSwitches(){
         foreach(Interactable s in switches){
@@ -50,5 +42,15 @@ public class _The_Room_Main : MonoBehaviour
         foreach(Interactable s in switches){
             s.Active();
         }
+    }
+    IEnumerator StartTimer()
+    {
+        Debug.Log("Started");
+        while (timer > 0f )
+        {
+            yield return new WaitForSeconds(1f);
+            timer -= 1f;
+        }
+        FailPuzzle();
     }
 }

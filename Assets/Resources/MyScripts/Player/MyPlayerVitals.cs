@@ -33,7 +33,7 @@ public class MyPlayerVitals : MonoBehaviour
         healthSlider.value = currentHealth;
         if (currentHealth == 0)
         {
-            Debug.Log("Player is dead!");
+            FindObjectOfType<Scene_Manager>().ChangeScene(0);
         }
         if (currentHealth < previousHealth)
         {

@@ -28,8 +28,6 @@ using UnityEngine;
         [Header("Input")]
         [SerializeField] KeyCode CroughKey = KeyCode.LeftControl;
         [Space(20)]
-        [Header("Sound")]
-        [SerializeField] AudioSource footSteps;
 
         [HideInInspector] public CharacterController characterController;
         Vector3 moveDirection = Vector3.zero;
@@ -43,7 +41,6 @@ using UnityEngine;
         [HideInInspector] public float horizontal;
         [HideInInspector] public float Lookvertical;
         [HideInInspector] public float Lookhorizontal;
-        bool isCrouch=false;
         private MyPlayerVitals myVitals;
         float installGravity;
         bool WallDistance;
@@ -92,7 +89,6 @@ using UnityEngine;
 
             if (Input.GetButton("Jump") && canMove && characterController.isGrounded && !isClimbing)
             {
-                footSteps.Stop();
                 moveDirection.y = jumpSpeed;
             }
             else
@@ -100,13 +96,6 @@ using UnityEngine;
                 moveDirection.y = movementDirectionY;
             }
             characterController.Move(moveDirection * Time.deltaTime);
-            if (horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0) {
-                if(!footSteps.isPlaying&&!isCrouch) {
-                footSteps.Play();
-                }
-              }else {
-               footSteps.Stop();
-            }
             if (Cursor.lockState == CursorLockMode.Locked && canMove)
             {
                 Lookvertical = -Input.GetAxis("Mouse Y");
@@ -120,7 +109,6 @@ using UnityEngine;
 
             if (Input.GetKey(CroughKey))
             {
-                isCrouch=true;
                 float Height = Mathf.Lerp(characterController.height, CroughHeight, 5 * Time.deltaTime);
                 characterController.height = Height;
                 WalkingValue = Mathf.Lerp(WalkingValue, CroughSpeed, 6 * Time.deltaTime);
@@ -130,7 +118,6 @@ using UnityEngine;
             {
                 if (characterController.height != InstallCroughHeight)
                 {
-                    isCrouch=false;
                     float Height = Mathf.Lerp(characterController.height, InstallCroughHeight, 6 * Time.deltaTime);
                     characterController.height = Height;
                     WalkingValue = Mathf.Lerp(WalkingValue, walkingSpeed, 4 * Time.deltaTime);
