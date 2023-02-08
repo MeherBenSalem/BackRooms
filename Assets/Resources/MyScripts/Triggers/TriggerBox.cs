@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class TriggerBox : MonoBehaviour
 {
-       public UnityEvent triggerEvent;
+    public UnityEvent triggerEvent;
 
     private void OnTriggerEnter(Collider other)
     {

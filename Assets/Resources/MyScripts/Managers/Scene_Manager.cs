@@ -9,12 +9,14 @@ public class Scene_Manager : MonoBehaviour
     [SerializeField] Slider progressSlider;
     [SerializeField] GameObject toActivate;
     [SerializeField] Animator animator;
+    [SerializeField] Animator logoAnimator;
     AsyncOperation loadOperation;
 
     public void ChangeScene(int index)
     {
         toActivate.SetActive(true);
         animator.SetTrigger("Start");
+        logoAnimator.Play("Logo");
         StartCoroutine(LoadSceneAsync(index));
     }
 
@@ -30,6 +32,7 @@ public class Scene_Manager : MonoBehaviour
             progressSlider.value = progress;
             yield return null;
         }
+        logoAnimator.SetTrigger("Stop");
     }
     public void Quit(){
         Application.Quit();
