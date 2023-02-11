@@ -5,22 +5,15 @@ using UnityEngine;
 
 public class CalculatorEvent : MonoBehaviour
 {
-    [SerializeField] int required;
+[SerializeField] Lever[] levers;
+[SerializeField] UnityEvent onReach;
 
-    [SerializeField] UnityEvent onReach;
-    int Current=0;
-
-    public void Reduce(int amount){
-        Current-=amount;
-        Checked();
+public void Check(){
+    foreach (Lever lever in levers) {
+    if (!lever.isOn) {
+      return;
     }
-    public void Add(int amount){
-        Current+=amount;
-        Checked();
-    }    
-    public void Checked(){
-        if(required==Current){
-            onReach.Invoke();
-        }
-    }
+  }
+  onReach.Invoke();
+}
 }
